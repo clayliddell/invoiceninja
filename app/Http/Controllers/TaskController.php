@@ -308,6 +308,7 @@ class TaskController extends BaseController
                     'description' => $task->present()->invoiceDescription($account, $showProject),
                     'duration' => $task->getHours(),
                     'cost' => $task->getRate(),
+                    'timeLog' => $task->time_log,
                 ];
                 $lastProjectId = $task->project_id;
             }

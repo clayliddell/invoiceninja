@@ -921,6 +921,11 @@
             @if (isset($tasks) && count($tasks))
                 NINJA.formIsChanged = true;
                 var tasks = {!! json_encode($tasks) !!};
+
+                tasks = tasks.sort(function(a,b){
+				  return JSON.parse(a.timeLog)[0][0] - JSON.parse(b.timeLog)[0][0];
+				});
+
                 for (var i=0; i<tasks.length; i++) {
                     var task = tasks[i];
                     var item = model.invoice().addItem(true);
@@ -929,6 +934,7 @@
 					item.cost(task.cost);
                     item.task_public_id(task.publicId);
                 }
+
                 model.invoice().has_tasks(true);
 				NINJA.formIsChanged = true;
             @endif
